@@ -3,153 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azizbek Karimovv | Dasturchi & Bot Yaratuvchi</title>
-    <meta name="description" content="Telegrammmmmmmmmm botlar yaratuvchisi. @karimovcinemabot, @instakrbot, @karimov_apkbot va boshqa loyihalar muallifi.">
-    <meta name="author" content="Azizbek Karimov">
+    <title>Azizbek Karimov | Developer</title>
+    <meta name="description" content="Telegram botlar yaratuvchisi. @karimovcinemabot, @instakrbot, @karimov_apkbot va boshqa loyihalar muallifi.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C96D;
+            --gold-dim: #8A6D2F;
+            --gold-pale: #F5E6C0;
+            --black: #080808;
+            --dark: #0D0D0D;
+            --dark-2: #141414;
+            --dark-3: #1C1C1C;
+            --dark-4: #242424;
+            --text: #C8C0B0;
+            --text-dim: #7A7060;
         }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a1a;
-            color: #fff;
-            line-height: 1.6;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--text);
             overflow-x: hidden;
+            cursor: none;
         }
 
-        /* Animatsiyalar */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* CUSTOM CURSOR */
+        .cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.1s;
+            mix-blend-mode: difference;
+        }
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--gold-dim);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+            transition: all 0.18s ease;
+        }
+        .cursor-ring.hover { transform: scale(2); border-color: var(--gold-light); }
+
+        /* NOISE TEXTURE */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.5;
         }
 
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(139, 92, 246, 0.5); }
-            50% { box-shadow: 0 0 25px rgba(139, 92, 246, 0.8); }
-        }
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--black); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 10px; }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes borderFlow {
-            0%, 100% { border-color: #8B5CF6; }
-            33% { border-color: #FF6B6B; }
-            66% { border-color: #06D6A0; }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        /* Header */
+        /* ─── HEADER ─── */
         header {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(10, 10, 26, 0.95);
-            backdrop-filter: blur(15px);
+            top: 0; width: 100%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(139, 92, 246, 0.3);
-            transition: all 0.3s;
+            padding: 22px 0;
+            transition: all 0.4s ease;
         }
-
         header.scrolled {
-            padding: 12px 0;
-            background: rgba(10, 10, 26, 0.98);
+            background: rgba(8,8,8,0.97);
+            backdrop-filter: blur(20px);
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(201,168,76,0.15);
         }
-
-        .navbar {
+        .nav-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #8B5CF6, #FF6B6B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--gold);
             text-decoration: none;
+            letter-spacing: 0.04em;
         }
-
+        .logo em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2.8rem;
         }
-
         .nav-links a {
-            color: #fff;
+            color: var(--text-dim);
             text-decoration: none;
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
             font-weight: 500;
-            transition: 0.3s;
+            transition: color 0.3s;
             position: relative;
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #8B5CF6, #FF6B6B);
-            transition: 0.3s;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
         }
-
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: #8B5CF6;
-        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
+            background: none; border: none;
+            color: var(--gold); font-size: 1.3rem;
+            cursor: none;
         }
 
-        /* Hero Section */
+        /* ─── HERO ─── */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -158,631 +151,1179 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        /* Gold mesh background */
+        .hero-bg {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent);
-            top: 20%;
-            right: 10%;
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 60% at 75% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 50% at 20% 70%, rgba(201,168,76,0.04) 0%, transparent 60%);
         }
 
-        .hero::after {
-            content: '';
+        /* Decorative lines */
+        .hero-lines {
             position: absolute;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255, 107, 107, 0.2), transparent);
-            bottom: 20%;
-            left: 5%;
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
+            right: 0; top: 0;
+            width: 55%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.07;
         }
+        .hero-lines svg { width: 100%; height: 100%; }
 
-        .hero-content {
+        .hero-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
             position: relative;
             z-index: 2;
         }
 
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(139, 92, 246, 0.2);
-            border: 1px solid rgba(139, 92, 246, 0.5);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            animation: glow 3s infinite;
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideIn 0.8s 0.3s forwards;
+        }
+        .hero-label::before {
+            content: '';
+            width: 40px; height: 1px;
+            background: var(--gold-dim);
         }
 
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
+        .hero-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 700;
+            line-height: 0.95;
+            color: #fff;
+            opacity: 0;
+            animation: slideIn 0.9s 0.5s forwards;
         }
-
-        .hero-title span {
-            background: linear-gradient(135deg, #8B5CF6, #FF6B6B, #06D6A0);
+        .hero-name span {
+            display: block;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-size: 200% 200%;
-            animation: gradientShift 4s ease infinite;
+            animation: goldShimmer 4s ease infinite 1.5s;
         }
 
-        @keyframes gradientShift {
+        @keyframes goldShimmer {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
 
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: #a0a0b0;
-            margin-bottom: 2rem;
-            max-width: 600px;
+        .hero-sub {
+            margin-top: 1.8rem;
+            font-size: 1rem;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+            max-width: 480px;
+            opacity: 0;
+            animation: slideIn 0.9s 0.7s forwards;
         }
 
         .hero-btns {
+            margin-top: 2.8rem;
             display: flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
+            opacity: 0;
+            animation: slideIn 0.9s 0.9s forwards;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 14px 35px;
-            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #8B5CF6;
-        }
-
-        .btn-outline:hover {
-            background: #8B5CF6;
-            border-color: #8B5CF6;
-        }
-
-        .stats {
-            display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #8B5CF6, #FF6B6B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #a0a0b0;
-        }
-
-        /* Section umumiy */
-        section {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #a0a0b0;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
-        }
-
-        .section-title span {
-            background: linear-gradient(135deg, #8B5CF6, #FF6B6B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* About */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            color: #b0b0c0;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .skill-tag {
-            padding: 8px 20px;
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .skill-tag:hover {
-            background: #8B5CF6;
-            transform: translateY(-2px);
-        }
-
-        .about-image {
-            position: relative;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 30px;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 100%;
-            height: 100%;
-            border: 2px solid rgba(139, 92, 246, 0.3);
-            border-radius: 30px;
-            z-index: -1;
-            animation: borderFlow 4s infinite;
-        }
-
-        /* Projects - Loyihalar */
-        .projects {
-            background: linear-gradient(180deg, #0a0a1a, #0f0f2a);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: rgba(15, 15, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            border-radius: 25px;
-            padding: 2rem;
-            transition: all 0.4s;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: #8B5CF6;
-            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
-        }
-
-        .project-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #8B5CF6, #FF6B6B);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card p {
-            color: #b0b0c0;
-            margin-bottom: 1rem;
-        }
-
-        .project-link {
+        .btn-gold {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #8B5CF6;
+            padding: 13px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--black);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             text-decoration: none;
+            border: none;
+            cursor: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn-gold:hover::before { opacity: 1; }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(201,168,76,0.3); }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 32px;
+            background: transparent;
+            border: 1px solid rgba(201,168,76,0.4);
+            color: var(--gold);
+            font-family: 'DM Sans', sans-serif;
             font-weight: 500;
-            transition: 0.3s;
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: none;
+            transition: all 0.3s;
+        }
+        .btn-ghost:hover {
+            background: rgba(201,168,76,0.08);
+            border-color: var(--gold);
+            transform: translateY(-2px);
         }
 
-        .project-link:hover {
-            gap: 12px;
+        .hero-stats {
+            display: flex;
+            gap: 4rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(201,168,76,0.12);
+            opacity: 0;
+            animation: slideIn 0.9s 1.1s forwards;
+        }
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .stat-lbl {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-top: 6px;
         }
 
-        /* Bots ro'yxati */
-        .bots-list {
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1s 1.8s forwards;
+        }
+        .scroll-line {
+            width: 1px; height: 50px;
+            background: linear-gradient(to bottom, var(--gold-dim), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.2); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* ─── SECTION BASE ─── */
+        section { padding: 110px 0; }
+
+        .wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .sec-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dim);
+            margin-bottom: 1rem;
+        }
+        .sec-label::before {
+            content: '';
+            width: 30px; height: 1px;
+            background: var(--gold-dim);
+        }
+
+        .sec-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 0.6rem;
+        }
+        .sec-title span {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ─── ABOUT ─── */
+        .about { background: var(--dark); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .about-text p {
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 1.4rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 2rem;
+        }
+
+        .stag {
+            padding: 7px 18px;
+            border: 1px solid rgba(201,168,76,0.25);
+            color: var(--gold-pale);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .stag::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(201,168,76,0.06);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        .stag:hover { border-color: var(--gold); color: var(--gold); }
+        .stag:hover::before { transform: scaleX(1); }
+
+        .about-visual {
+            position: relative;
+        }
+        .about-card {
+            background: var(--dark-2);
+            border: 1px solid rgba(201,168,76,0.18);
+            padding: 3rem;
+            position: relative;
+        }
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: 20px;
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+        .about-card::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; right: 20px;
+            width: 60px; height: 1px;
+            background: linear-gradient(270deg, var(--gold-dim), transparent);
+        }
+        .about-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--gold-pale);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .about-detail {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+        }
+        .about-detail:last-child { border-bottom: none; }
+        .about-detail i { color: var(--gold); width: 16px; }
+        .about-detail span { font-size: 0.88rem; color: var(--text); }
+
+        /* ─── PROJECTS ─── */
+        .projects { background: var(--black); }
+
+        .proj-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5px;
+            margin-top: 4rem;
+            border: 1px solid rgba(201,168,76,0.15);
+        }
+
+        .proj-card {
+            background: var(--dark-2);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s;
+            text-decoration: none;
+            display: block;
+        }
+        .proj-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(201,168,76,0.07) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .proj-card:hover { background: var(--dark-3); }
+        .proj-card:hover::before { opacity: 1; }
+
+        .proj-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(201,168,76,0.1);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            transition: color 0.4s;
+        }
+        .proj-card:hover .proj-num { color: rgba(201,168,76,0.25); }
+
+        .proj-icon {
+            width: 48px; height: 48px;
+            border: 1px solid rgba(201,168,76,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        .proj-card:hover .proj-icon {
+            background: rgba(201,168,76,0.1);
+            border-color: var(--gold);
+        }
+
+        .proj-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold-pale);
+            margin-bottom: 0.8rem;
+        }
+        .proj-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .proj-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 500;
+            transition: gap 0.3s;
+        }
+        .proj-card:hover .proj-link { gap: 14px; }
+
+        /* Corner decoration */
+        .proj-card .corner {
+            position: absolute;
+            top: 0; right: 0;
+            width: 30px; height: 30px;
+            border-top: 1px solid rgba(201,168,76,0.3);
+            border-right: 1px solid rgba(201,168,76,0.3);
+            transition: all 0.4s;
+        }
+        .proj-card:hover .corner {
+            width: 50px; height: 50px;
+            border-color: var(--gold);
+        }
+
+        /* ─── BOTS ─── */
+        .bots-sec {
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .bots-sec::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .bots-flex {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
-            margin-top: 3rem;
+            margin-top: 3.5rem;
         }
 
-        .bot-item {
-            padding: 12px 25px;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 50px;
+        .bot-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border: 1px solid rgba(201,168,76,0.25);
+            color: var(--text);
             text-decoration: none;
-            color: white;
-            transition: 0.3s;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-
-        .bot-item:hover {
-            background: #8B5CF6;
-            transform: translateY(-2px);
+        .bot-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(201,168,76,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.4s;
         }
+        .bot-pill:hover { border-color: var(--gold); color: var(--gold-pale); }
+        .bot-pill:hover::before { transform: translateX(0); }
+        .bot-pill i { color: var(--gold); }
 
-        /* Contact */
-        .contact-content {
+        /* ─── CONTACT ─── */
+        .contact { background: var(--black); }
+
+        .contact-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            margin-top: 4rem;
         }
 
-        .contact-item {
+        .contact-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold-pale);
+            margin-bottom: 1rem;
+        }
+        .contact-info p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .clink {
             display: flex;
             align-items: center;
-            gap: 1.2rem;
-            padding: 1rem;
-            background: rgba(255,255,255,0.03);
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            transition: 0.3s;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(201,168,76,0.1);
+            text-decoration: none;
+            transition: all 0.3s;
         }
+        .clink:first-of-type { border-top: 1px solid rgba(201,168,76,0.1); }
+        .clink:hover { padding-left: 8px; }
 
-        .contact-item:hover {
-            background: rgba(139, 92, 246, 0.1);
-            transform: translateX(5px);
-        }
-
-        .contact-icon {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-            border-radius: 15px;
+        .clink-icon {
+            width: 42px; height: 42px;
+            border: 1px solid rgba(201,168,76,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--gold);
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .clink:hover .clink-icon {
+            background: rgba(201,168,76,0.1);
+            border-color: var(--gold);
+        }
+        .clink-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 3px;
+        }
+        .clink-val {
+            font-size: 0.95rem;
+            color: var(--gold-pale);
+        }
+        .clink i.arrow {
+            margin-left: auto;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+        .clink:hover i.arrow { transform: translateX(5px); color: var(--gold); }
+
+        /* FORM */
+        .form-wrap {
+            background: var(--dark-2);
+            border: 1px solid rgba(201,168,76,0.18);
+            padding: 2.8rem;
+            position: relative;
+        }
+        .form-wrap::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: 0;
+            width: 80px; height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.5rem;
+            color: var(--gold-pale);
+            margin-bottom: 0.5rem;
+        }
+        .form-sub {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
         }
 
-        .contact-details a, .contact-details p {
-            color: #fff;
-            text-decoration: none;
-        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-        .contact-details p {
-            color: #b0b0c0;
+        .field {
+            margin-bottom: 1rem;
+            position: relative;
         }
+        .field label {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+        .field input,
+        .field textarea,
+        .field select {
+            width: 100%;
+            padding: 13px 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(201,168,76,0.18);
+            color: var(--gold-pale);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: var(--text-dim);
+        }
+        .field input:focus,
+        .field textarea:focus {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.04);
+        }
+        .field textarea { resize: vertical; min-height: 110px; }
 
-        .contact-form input,
-        .contact-form textarea {
+        .field select { cursor: none; color: var(--text-dim); }
+        .field select option { background: var(--dark-2); }
+        .field select:focus { border-color: var(--gold); color: var(--gold-pale); }
+
+        .submit-btn {
             width: 100%;
             padding: 15px;
-            margin-bottom: 1rem;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            color: white;
-            font-family: inherit;
-            transition: 0.3s;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--black);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.82rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: none;
+            cursor: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .submit-btn:hover::before { opacity: 1; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(201,168,76,0.35); }
+        .submit-btn span { position: relative; z-index: 1; }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--dark-2);
+            border: 1px solid var(--gold);
+            padding: 1.2rem 2rem;
+            z-index: 9000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            max-width: 320px;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.error { border-color: #ff4444; }
+        .toast-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+        .toast.error .toast-title { color: #ff6666; }
+        .toast-msg { font-size: 0.82rem; color: var(--text-dim); }
+
+        /* Loading state */
+        .submit-btn.loading { opacity: 0.7; pointer-events: none; }
+        .submit-btn.loading span::after {
+            content: ' ...';
+            animation: dots 1.2s steps(3, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ' .'; }
+            40% { content: ' ..'; }
+            60%, 100% { content: ' ...'; }
         }
 
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: #8B5CF6;
-        }
-
-        /* Footer */
+        /* ─── FOOTER ─── */
         footer {
-            background: #05050f;
+            background: var(--dark);
             padding: 3rem 0;
-            text-align: center;
-            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            border-top: 1px solid rgba(201,168,76,0.12);
         }
-
-        .social-links {
+        .footer-inner {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            justify-content: space-between;
+            align-items: center;
         }
-
-        .social-links a {
-            width: 45px;
-            height: 45px;
-            background: rgba(139, 92, 246, 0.1);
-            border-radius: 50%;
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+        .footer-copy {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            letter-spacing: 0.08em;
+        }
+        .social-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-row a {
+            width: 38px; height: 38px;
+            border: 1px solid rgba(201,168,76,0.25);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: var(--text-dim);
             text-decoration: none;
-            transition: 0.3s;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .social-row a:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(201,168,76,0.08);
         }
 
-        .social-links a:hover {
-            background: #8B5CF6;
-            transform: translateY(-3px);
+        /* ─── SCROLL ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero-title { font-size: 3rem; }
-            .about-content, .contact-content { grid-template-columns: 1fr; gap: 2rem; }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        .reveal-left.in { opacity: 1; transform: translateX(0); }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .reveal-right.in { opacity: 1; transform: translateX(0); }
 
+        /* delay utilities */
+        .d1 { transition-delay: 0.1s; }
+        .d2 { transition-delay: 0.2s; }
+        .d3 { transition-delay: 0.3s; }
+        .d4 { transition-delay: 0.4s; }
+        .d5 { transition-delay: 0.5s; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .proj-grid { grid-template-columns: 1fr 1fr; }
+            .about-grid { gap: 3rem; }
+        }
         @media (max-width: 768px) {
+            section { padding: 80px 0; }
+            .wrap { padding: 0 24px; }
+            .nav-wrap { padding: 0 24px; }
+            .hero-wrap { padding: 0 24px; }
             .menu-toggle { display: block; }
             .nav-links {
                 position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 70px);
-                background: #0a0a1a;
+                top: 0; right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--dark);
+                border-left: 1px solid rgba(201,168,76,0.2);
                 flex-direction: column;
-                align-items: center;
-                padding-top: 3rem;
-                transition: 0.3s;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 0 3rem;
+                gap: 2.5rem;
+                transition: right 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             }
-            .nav-links.active { left: 0; }
-            .hero-btns { flex-direction: column; }
-            .hero-title { font-size: 2.2rem; }
-            .section-title { font-size: 2rem; }
-            .projects-grid { grid-template-columns: 1fr; }
+            .nav-links a { font-size: 1rem; }
+            .nav-links.open { right: 0; }
+            .proj-grid { grid-template-columns: 1fr; border: none; gap: 1px; }
+            .proj-card { border: 1px solid rgba(201,168,76,0.15); }
+            .about-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .hero-stats { gap: 2rem; }
+            .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="container">
-        <nav class="navbar">
-            <a href="#" class="logo">Aziz<span>bek</span></a>
-            <ul class="nav-links">
-                <li><a href="#home" class="active">Bosh sahifa</a></li>
-                <li><a href="#about">Haqimda</a></li>
-                <li><a href="#projects">Loyihalar</a></li>
-                <li><a href="#bots">Botlar</a></li>
-                <li><a href="#contact">Aloqa</a></li>
-            </ul>
-            <button class="menu-toggle"><i class="fas fa-bars"></i></button>
-        </nav>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+    <div class="toast-title" id="toastTitle">Xabar yuborildi!</div>
+    <div class="toast-msg" id="toastMsg">Tez orada javob beraman.</div>
+</div>
+
+<!-- HEADER -->
+<header id="header">
+    <div class="nav-wrap">
+        <a href="#home" class="logo">Aziz<em>bek</em></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="active">Bosh sahifa</a></li>
+            <li><a href="#about">Haqimda</a></li>
+            <li><a href="#projects">Loyihalar</a></li>
+            <li><a href="#bots">Botlar</a></li>
+            <li><a href="#contact">Aloqa</a></li>
+        </ul>
+        <button class="menu-toggle" id="menuBtn"><i class="fas fa-bars"></i></button>
     </div>
 </header>
 
-<!-- Hero Section -->
+<!-- HERO -->
 <section id="home" class="hero">
-    <div class="container">
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-code"></i> Telegram Bot Yaratuvchi
-            </div>
-            <h1 class="hero-title">Azizbek <span>Karimov</span></h1>
-            <p class="hero-subtitle">Dasturchi | Telegram Botlar yaratuvchi | 1 yillik tajriba</p>
-            <div class="hero-btns">
-                <a href="#projects" class="btn">Loyihalarim</a>
-                <a href="#contact" class="btn btn-outline">Aloqa</a>
-            </div>
-            <div class="stats">
-                <div class="stat-item"><div class="stat-number">4+</div><div class="stat-label">Loyihalar</div></div>
-                <div class="stat-item"><div class="stat-number">1+</div><div class="stat-label">Yil Tajriba</div></div>
-                <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Active Bot</div></div>
-            </div>
-        </div>
+    <div class="hero-bg"></div>
+    <div class="hero-lines">
+        <svg viewBox="0 0 500 800" preserveAspectRatio="none">
+            <line x1="50" y1="0" x2="50" y2="800" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="150" y1="0" x2="150" y2="800" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="250" y1="0" x2="250" y2="800" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="350" y1="0" x2="350" y2="800" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="450" y1="0" x2="450" y2="800" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="0" y1="150" x2="500" y2="150" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="0" y1="300" x2="500" y2="300" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="0" y1="450" x2="500" y2="450" stroke="#C9A84C" stroke-width="0.5"/>
+            <line x1="0" y1="600" x2="500" y2="600" stroke="#C9A84C" stroke-width="0.5"/>
+            <circle cx="50" cy="150" r="3" fill="#C9A84C" opacity="0.8"/>
+            <circle cx="150" cy="300" r="3" fill="#C9A84C" opacity="0.8"/>
+            <circle cx="350" cy="150" r="3" fill="#C9A84C" opacity="0.8"/>
+            <circle cx="250" cy="450" r="3" fill="#C9A84C" opacity="0.8"/>
+            <circle cx="450" cy="300" r="3" fill="#C9A84C" opacity="0.8"/>
+        </svg>
     </div>
-</section>
-
-<!-- About -->
-<section id="about">
-    <div class="container">
-        <h2 class="section-title">Haqimda</h2>
-        <p class="section-subtitle">Kimman va nimalar qilaman</p>
-        <div class="about-content">
-            <div class="about-text">
-                <p>Men <strong>Azizbek Karimov</strong> — dasturchi va Telegram botlar yaratuvchisi. 1 yillik tajribam davomida 4 dan ortiq loyihalarni amalga oshirganman.</p>
-                <p>Asosiy yo'nalishim — Telegram botlar yaratish, web dasturlash va API integratsiyalari. Har bir loyihaga kreativ yondashaman va mijozlar ehtiyojlarini inobatga olaman.</p>
-                <div class="skills">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Aiogram</span>
-                    <span class="skill-tag">Telegram API</span>
-                    <span class="skill-tag">HTML/CSS</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">MySQL</span>
-                </div>
-            </div>
-            <div class="about-image">
-                <img src="https://placehold.co/500x450/1a1a3a/8B5CF6?text=Azizbek" alt="Azizbek">
-            </div>
+    <div class="hero-wrap">
+        <div class="hero-label">Telegram Bot Developer</div>
+        <h1 class="hero-name">
+            Azizbek
+            <span>Karimov</span>
+        </h1>
+        <p class="hero-sub">Dasturchi · Telegram botlar yaratuvchi · 1 yillik tajriba</p>
+        <div class="hero-btns">
+            <a href="#projects" class="btn-gold"><i class="fas fa-rocket"></i> Loyihalar</a>
+            <a href="#contact" class="btn-ghost"><i class="fas fa-paper-plane"></i> Aloqa</a>
         </div>
-    </div>
-</section>
-
-<!-- Projects Section -->
-<section id="projects" class="projects">
-    <div class="container">
-        <h2 class="section-title">Loyihalarim</h2>
-        <p class="section-subtitle">Mening eng yaxshi ishlarim</p>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-icon"><i class="fab fa-telegram"></i></div>
-                <h3>@karimovcinemabot</h3>
-                <p>Kino va seriallar qidiradigan, yuklab olish imkoniyatiga ega Telegram bot. Foydalanuvchilarga qulay interfeys.</p>
-                <a href="https://t.me/karimovcinemabot" target="_blank" class="project-link">Botni ko'rish →</a>
-            </div>
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-download"></i></div>
-                <h3>@instakrbot</h3>
-                <p>Instagram, TikTok, YouTube kabi tarmoqlardan video, rasm va story yuklab olish imkoniyati.</p>
-                <a href="https://t.me/instakrbot" target="_blank" class="project-link">Botni ko'rish →</a>
-            </div>
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-android"></i></div>
-                <h3>@karimov_apkbot</h3>
-                <p>APK fayllarni yuklab olish va o'rnatish uchun qulay Telegram bot. Katta APK bazasi.</p>
-                <a href="https://t.me/karimov_apkbot" target="_blank" class="project-link">Botni ko'rish →</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Bots Section -->
-<section id="bots">
-    <div class="container">
-        <h2 class="section-title">Telegram <span>Botlar</span></h2>
-        <p class="section-subtitle">Faoliyat yuritayotgan botlarim</p>
-        <div class="bots-list">
-            <a href="https://t.me/karimovcinemabot" target="_blank" class="bot-item"><i class="fab fa-telegram"></i> @karimovcinemabot</a>
-            <a href="https://t.me/instakrbot" target="_blank" class="bot-item"><i class="fab fa-telegram"></i> @instakrbot</a>
-            <a href="https://t.me/karimov_apkbot" target="_blank" class="bot-item"><i class="fab fa-telegram"></i> @karimov_apkbot</a>
-        </div>
-    </div>
-</section>
-
-<!-- Contact -->
-<section id="contact">
-    <div class="container">
-        <h2 class="section-title">Aloqa</h2>
-        <p class="section-subtitle">Men bilan bog'lanish</p>
-        <div class="contact-content">
+        <div class="hero-stats">
             <div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                    <div class="contact-details"><h3>Telefon</h3><a href="tel:+998942208880">+998 94 220 88 80</a></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-                    <div class="contact-details"><h3>Email</h3><a href="mailto:valiyaxd@gmail.com">valiyaxd@gmail.com</a></div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon"><i class="fab fa-telegram"></i></div>
-                    <div class="contact-details"><h3>Telegram</h3><a href="https://t.me/sajdagox">@sajdagox</a></div>
+                <div class="stat-num">4+</div>
+                <div class="stat-lbl">Loyihalar</div>
+            </div>
+            <div>
+                <div class="stat-num">1+</div>
+                <div class="stat-lbl">Yil Tajriba</div>
+            </div>
+            <div>
+                <div class="stat-num">3</div>
+                <div class="stat-lbl">Aktiv Bot</div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-hint">
+        <div class="scroll-line"></div>
+        Scroll
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="wrap">
+        <div class="sec-label reveal">Haqimda</div>
+        <h2 class="sec-title reveal">Kimman va <span>nimalar qilaman</span></h2>
+        <div class="about-grid">
+            <div class="about-text reveal-left">
+                <p>Men <strong style="color:var(--gold-pale)">Azizbek Karimov</strong> — dasturchi va Telegram botlar yaratuvchisi. 1 yillik tajribam davomida 4 dan ortiq loyihalarni amalga oshirganman.</p>
+                <p>Asosiy yo'nalishim — Telegram botlar yaratish, web dasturlash va API integratsiyalari. Har bir loyihaga kreativ yondashaman va mijozlar ehtiyojlarini inobatga olaman.</p>
+                <div class="skills-grid">
+                    <span class="stag">Python</span>
+                    <span class="stag">Aiogram</span>
+                    <span class="stag">Telegram API</span>
+                    <span class="stag">HTML / CSS</span>
+                    <span class="stag">JavaScript</span>
+                    <span class="stag">MySQL</span>
+                    <span class="stag">REST API</span>
+                    <span class="stag">Git</span>
                 </div>
             </div>
-            <div class="contact-form">
-                <form id="contactForm">
-                    <input type="text" placeholder="Ismingiz" required>
-                    <input type="email" placeholder="Email" required>
-                    <textarea rows="4" placeholder="Xabaringiz..."></textarea>
-                    <button type="submit" class="btn">Yuborish</button>
-                </form>
+            <div class="about-visual reveal-right">
+                <div class="about-card">
+                    <p class="about-quote">"Har bir kod satrida qandaydir maqsad yotishi kerak."</p>
+                    <div class="about-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Toshkent, O'zbekiston</span>
+                    </div>
+                    <div class="about-detail">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Self-taught Developer</span>
+                    </div>
+                    <div class="about-detail">
+                        <i class="fas fa-language"></i>
+                        <span>O'zbek · Rus · Python 😄</span>
+                    </div>
+                    <div class="about-detail">
+                        <i class="fas fa-clock"></i>
+                        <span>1+ yil tajriba</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<footer>
-    <div class="container">
-        <div class="social-links">
-            <a href="https://t.me/sajdagox" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="https://github.com/azizbek" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://instagram.com/azizbek" target="_blank"><i class="fab fa-instagram"></i></a>
+<!-- PROJECTS -->
+<section id="projects" class="projects">
+    <div class="wrap">
+        <div class="sec-label reveal">Loyihalar</div>
+        <h2 class="sec-title reveal">Mening eng <span>yaxshi ishlarim</span></h2>
+        <div class="proj-grid">
+            <a href="https://t.me/karimovcinemabot" target="_blank" class="proj-card reveal d1">
+                <div class="corner"></div>
+                <div class="proj-num">01</div>
+                <div class="proj-icon"><i class="fab fa-telegram"></i></div>
+                <h3 class="proj-name">@karimovcinemabot</h3>
+                <p class="proj-desc">Kino va seriallar qidiradigan, yuklab olish imkoniyatiga ega Telegram bot. Foydalanuvchilarga qulay interfeys bilan keng kino bazasi.</p>
+                <span class="proj-link">Botni ko'rish <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <a href="https://t.me/instakrbot" target="_blank" class="proj-card reveal d2">
+                <div class="corner"></div>
+                <div class="proj-num">02</div>
+                <div class="proj-icon"><i class="fas fa-download"></i></div>
+                <h3 class="proj-name">@instakrbot</h3>
+                <p class="proj-desc">Instagram, TikTok, YouTube kabi ijtimoiy tarmoqlardan video, rasm va story yuklab olish imkoniyati beradigan universal bot.</p>
+                <span class="proj-link">Botni ko'rish <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <a href="https://t.me/karimov_apkbot" target="_blank" class="proj-card reveal d3">
+                <div class="corner"></div>
+                <div class="proj-num">03</div>
+                <div class="proj-icon"><i class="fas fa-android"></i></div>
+                <h3 class="proj-name">@karimov_apkbot</h3>
+                <p class="proj-desc">APK fayllarni yuklab olish va o'rnatish uchun qulay Telegram bot. Keng APK bazasi, tez va ishonchli yuklash.</p>
+                <span class="proj-link">Botni ko'rish <i class="fas fa-arrow-right"></i></span>
+            </a>
         </div>
-        <p>&copy; 2025 Azizbek Karimov. Barcha huquqlar himoyalangan.</p>
+    </div>
+</section>
+
+<!-- BOTS -->
+<section id="bots" class="bots-sec">
+    <div class="wrap">
+        <div class="sec-label reveal" style="justify-content:center">Aktiv Botlar</div>
+        <h2 class="sec-title reveal" style="text-align:center">Telegram <span>Botlarim</span></h2>
+        <p class="reveal" style="text-align:center;color:var(--text-dim);font-size:0.9rem;margin-top:0.5rem">Faoliyat yuritayotgan botlarim</p>
+        <div class="bots-flex">
+            <a href="https://t.me/karimovcinemabot" target="_blank" class="bot-pill reveal d1"><i class="fab fa-telegram"></i> @karimovcinemabot</a>
+            <a href="https://t.me/instakrbot" target="_blank" class="bot-pill reveal d2"><i class="fab fa-telegram"></i> @instakrbot</a>
+            <a href="https://t.me/karimov_apkbot" target="_blank" class="bot-pill reveal d3"><i class="fab fa-telegram"></i> @karimov_apkbot</a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <div class="wrap">
+        <div class="sec-label reveal">Aloqa</div>
+        <h2 class="sec-title reveal">Men bilan <span>bog'lanish</span></h2>
+        <div class="contact-grid">
+            <div class="reveal-left">
+                <h3>Keling, birgalikda\nishlaylik</h3>
+                <p>Loyiha yoki bot yaratish bo'yicha fikringiz bormi? Menga yozing — tez orada javob beraman!</p>
+                <a href="tel:+998942208880" class="clink">
+                    <div class="clink-icon"><i class="fas fa-phone"></i></div>
+                    <div>
+                        <div class="clink-label">Telefon</div>
+                        <div class="clink-val">+998 94 220 88 80</div>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </a>
+                <a href="mailto:valiyaxd@gmail.com" class="clink">
+                    <div class="clink-icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <div class="clink-label">Email</div>
+                        <div class="clink-val">valiyaxd@gmail.com</div>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </a>
+                <a href="https://t.me/sajdagox" target="_blank" class="clink">
+                    <div class="clink-icon"><i class="fab fa-telegram"></i></div>
+                    <div>
+                        <div class="clink-label">Telegram</div>
+                        <div class="clink-val">@sajdagox</div>
+                    </div>
+                    <i class="fas fa-arrow-right arrow"></i>
+                </a>
+            </div>
+            <div class="reveal-right">
+                <div class="form-wrap">
+                    <h3 class="form-title">Xabar yuboring</h3>
+                    <p class="form-sub">Forma orqali to'g'ridan-to'g'ri Telegramga kelib tushadi</p>
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="field">
+                                <label>Ismingiz</label>
+                                <input type="text" id="fname" placeholder="Azizbek" required>
+                            </div>
+                            <div class="field">
+                                <label>Telefon</label>
+                                <input type="tel" id="fphone" placeholder="+998 90 000 00 00">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Email</label>
+                            <input type="email" id="femail" placeholder="sizning@email.com">
+                        </div>
+                        <div class="field">
+                            <label>Mavzu</label>
+                            <select id="fsubject">
+                                <option value="">Mavzuni tanlang</option>
+                                <option value="Bot yaratish">Bot yaratish</option>
+                                <option value="Web loyiha">Web loyiha</option>
+                                <option value="API integratsiya">API integratsiya</option>
+                                <option value="Boshqa">Boshqa</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Xabaringiz</label>
+                            <textarea id="fmsg" placeholder="Loyihangiz haqida yozing..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span id="btnText"><i class="fas fa-paper-plane"></i> &nbsp;Telegram orqali yuborish</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="wrap">
+        <div class="footer-inner">
+            <div class="footer-logo">Aziz<em style="font-style:italic">bek</em></div>
+            <p class="footer-copy">© 2025 Azizbek Karimov. Barcha huquqlar himoyalangan.</p>
+            <div class="social-row">
+                <a href="https://t.me/sajdagox" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="https://github.com/azizbek" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com/azizbek" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
     </div>
 </footer>
 
 <script>
+    // ══════════════════════════════════════════
+    // TELEGRAM CONFIG — shu yerga o'z ma'lumotlaringizni kiriting
+    // ══════════════════════════════════════════
+    const TG_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';   // ← o'zgartiring
+    const TG_CHAT_ID   = 'YOUR_CHAT_ID_HERE';     // ← o'zgartiring
+    // ══════════════════════════════════════════
+
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX - 4 + 'px';
+        cursor.style.top  = e.clientY - 4 + 'px';
+        ring.style.left   = e.clientX - 18 + 'px';
+        ring.style.top    = e.clientY - 18 + 'px';
+    });
+    document.querySelectorAll('a, button, .proj-card, .bot-pill, .stag, .clink').forEach(el => {
+        el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    });
+
     // Header scroll
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+    window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', scrollY > 60);
     });
 
-    // Mobil menyu
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        menuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    // Mobile menu
+    const menuBtn  = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        menuBtn.innerHTML = navLinks.classList.contains('open')
+            ? '<i class="fas fa-times"></i>'
+            : '<i class="fas fa-bars"></i>';
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        });
     });
 
-    // Nav link active
+    // Active nav on scroll
     const sections = document.querySelectorAll('section');
     const navItems = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            if (scrollY >= sectionTop) {
-                current = section.getAttribute('id');
-            }
-        });
-        navItems.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
+        let cur = '';
+        sections.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
+        navItems.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
         });
     });
 
-    // Scroll animatsiyalari
-    const animateElements = document.querySelectorAll('.project-card, .contact-item, .skill-tag, .about-content > div');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.1 });
-    animateElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
-    });
+    revealEls.forEach(el => obs.observe(el));
 
-    // Form submit
-    document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+    // Toast
+    function showToast(title, msg, isError = false) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastTitle').textContent = title;
+        document.getElementById('toastMsg').textContent = msg;
+        toast.classList.toggle('error', isError);
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    // CONTACT FORM → Telegram
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Xabaringiz qabul qilindi! Tez orada javob beraman.');
-        e.target.reset();
+
+        const name    = document.getElementById('fname').value.trim();
+        const phone   = document.getElementById('fphone').value.trim();
+        const email   = document.getElementById('femail').value.trim();
+        const subject = document.getElementById('fsubject').value;
+        const msg     = document.getElementById('fmsg').value.trim();
+
+        if (!name) { showToast('Xato', 'Iltimos, ismingizni kiriting.', true); return; }
+
+        const text = [
+            '📬 <b>Yangi Xabar — Portfolio Sayt</b>',
+            '',
+            `👤 <b>Ism:</b> ${name}`,
+            phone   ? `📞 <b>Telefon:</b> ${phone}` : '',
+            email   ? `📧 <b>Email:</b> ${email}` : '',
+            subject ? `📌 <b>Mavzu:</b> ${subject}` : '',
+            msg     ? `\n💬 <b>Xabar:</b>\n${msg}` : '',
+            '',
+            `⏰ ${new Date().toLocaleString('uz-UZ', { timeZone: 'Asia/Tashkent' })}`
+        ].filter(Boolean).join('\n');
+
+        const btn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        btn.classList.add('loading');
+        btnText.textContent = 'Yuborilmoqda';
+
+        try {
+            const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TG_CHAT_ID,
+                    text: text,
+                    parse_mode: 'HTML'
+                })
+            });
+            const data = await res.json();
+            if (data.ok) {
+                showToast('✅ Xabar yuborildi!', 'Tez orada javob beraman, rahmat!');
+                e.target.reset();
+            } else {
+                showToast('Xato yuz berdi', 'Bot token yoki Chat ID noto\'g\'ri.', true);
+            }
+        } catch(err) {
+            showToast('Xato', 'Tarmoq xatosi. Qaytadan urinib ko\'ring.', true);
+        } finally {
+            btn.classList.remove('loading');
+            btnText.innerHTML = '<i class="fas fa-paper-plane"></i> &nbsp;Telegram orqali yuborish';
+        }
     });
 </script>
 </body>
